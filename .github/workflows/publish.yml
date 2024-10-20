@@ -22,10 +22,13 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Node.js ⚙️ - Cache dependencies ⚡ - Install dependencies 🔧
-        uses: ./.github/workflows
+        uses: ./.github/actions/setup-node # Path to your reusable action
         with:
           node-version: 20
           cache-key: npm-cache-${{ hashFiles('package-lock.json') }}
+
+      - name: Install dependencies 🔧
+        run: npm install
 
       - name: Setup Pages ⚙️
         uses: actions/configure-pages@v4
