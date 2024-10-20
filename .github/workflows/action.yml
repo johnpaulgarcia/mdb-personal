@@ -1,19 +1,32 @@
 name: setup-node
 description: "Setup Node.js ⚙️ - Cache dependencies ⚡ - Install dependencies 🔧"
-runs:
-  using: "composite"
-  steps:
-    - name: Setup Node.js ⚙️
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20
 
-    - name: Cache npm cache ⚡
-      id: cache_dependencies
-      uses: actions/cache@v3
-      with:
-        path: ~/.npm
-        key: npm-cache-${{ hashFiles('package-lock.json') }}
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
-    - name: Install dependencies 🔧
-      run: npm ci
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js ⚙️
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Cache npm cache ⚡
+        id: cache_dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: npm-cache-${{ hashFiles('package-lock.json') }}
+
+      - name: Install dependencies 🔧
+        run: npm ci
