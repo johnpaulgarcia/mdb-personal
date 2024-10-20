@@ -1,8 +1,9 @@
 name: publish-to-github-pages
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["setup-node"] # Replace this with the name of your first workflow (the one running setup-node)
+    types:
+      - completed
 
 permissions:
   contents: read
