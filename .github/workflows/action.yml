@@ -26,5 +26,6 @@ runs:
         key: ${{ inputs.cache-key }}
 
     - name: Install dependencies 🔧
+      shell: bash  # Added shell property here
       run: npm ci
       if: steps.cache_dependencies.outputs.cache-hit != 'true'
