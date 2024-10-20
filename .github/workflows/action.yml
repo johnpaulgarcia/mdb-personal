@@ -1,18 +1,11 @@
 name: "Setup Node.js ⚙️"
 description: "Setup Node.js ⚙️ - Cache dependencies ⚡ - Install dependencies 🔧"
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-
 inputs:
   node-version:
-    description: "Node.js version"
+    description: "Node.js version to use"
     required: true
+    default: "20"
   cache-key:
     description: "Cache key for dependencies"
     required: true
@@ -25,11 +18,11 @@ runs:
       with:
         node-version: ${{ inputs.node-version }}
 
-    - name: Cache npm cache ⚡
+    - name: Cache npm dependencies ⚡
       id: cache_dependencies
       uses: actions/cache@v3
       with:
-        path: ~/.npm
+        path: ~/.npm # Cache npm directory instead of node_modules
         key: ${{ inputs.cache-key }}
 
     - name: Install dependencies 🔧
