@@ -1,6 +1,14 @@
 name: "Setup Node.js ⚙️"
 description: "Setup Node.js ⚙️ - Cache dependencies ⚡ - Install dependencies 🔧"
 
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
 inputs:
   node-version:
     description: "Node.js version"
